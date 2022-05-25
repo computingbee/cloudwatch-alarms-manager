@@ -1,0 +1,118 @@
+{
+    "Namespace":"AWS/EC2",
+    "Alarms":[
+        {
+            "Type": "Instance",
+            "Prefix": "EC2_StatusCheckFailed_System",
+            "Description" : "System Status Check is failing for over 10 minutes",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 600,
+                "EvaluationPeriods": 1,
+                "Threshold": 0,
+                "MetricName": "StatusCheckFailed_System",
+                "Statistic": "Average"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "Instance",
+            "Prefix": "EC2_StatusCheckFailed_Instance",
+            "Description" : "Instance Status Check is failing for over 10 minutes",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 600,
+                "EvaluationPeriods": 1,
+                "Threshold": 0,
+                "MetricName": "StatusCheckFailed_Instance",
+                "Statistic": "Average"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "Instance",
+            "Prefix": "EC2_StatusCheckFailed",
+            "Description" : "Status Check is failing for over 10 minutes",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 600,
+                "EvaluationPeriods": 1,
+                "Threshold": 0,
+                "MetricName": "StatusCheckFailed",
+                "Statistic": "Average"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "CPU",
+            "Prefix": "High_CPU_Utilization",
+            "Description" : "CPU is over 90% for 30 minutes",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 300,
+                "EvaluationPeriods": 3,
+                "Threshold": 90,
+                "MetricName": "CPUUtilization",
+                "Statistic": "Average"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "Linux",
+            "Prefix": "RootVol_SpaceUtilization",
+            "Description" : "root volume space is utilized more than 95%",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 300,
+                "EvaluationPeriods": 1,
+                "Threshold": 95,
+                "MetricName": "disk_used_percent",
+                "Statistic": "Minimum"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "Linux",
+            "Prefix": "Linux_High_MemoryUsage",
+            "Description" : "memory is over 90% for 30 minutes",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 300,
+                "EvaluationPeriods": 6,
+                "Threshold": 90,
+                "MetricName": "mem_used_percent",
+                "Statistic": "Average"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "Windows",
+            "Prefix": "Windows_LogicalFreeSpace_C",
+            "Description" : "C drive space is less than 10%",
+            "Condition": {
+                "ComparisonOperator": "LessThanOrEqualToThreshold",
+                "Period": 300,
+                "Threshold": 10,
+                "EvaluationPeriods": 1,
+                "MetricName": "LogicalDisk % Free Space",
+                "Statistic": "Minimum" 
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        },
+        {
+            "Type": "Windows",
+            "Prefix": "Windows_Memory_Committed_Bytes_Usage",
+            "Description" : "memory is over 90% for 30 minutes",
+            "Condition": {
+                "ComparisonOperator": "GreaterThanThreshold",
+                "Period": 300,
+                "EvaluationPeriods": 6,
+                "Threshold": 90,
+                "MetricName": "Memory % Committed Bytes In Use",
+                "Statistic": "Average"
+            },
+            "AlarmActions": ["arn:aws:sns:us-east-1:000000000000:CWNotifications"]
+        }
+
+    ]
+}

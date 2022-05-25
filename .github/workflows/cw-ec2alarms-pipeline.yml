@@ -1,0 +1,28 @@
+name: Deploy CWEC2Alarms
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - bin/ec2alarms.zip
+
+jobs:
+  deploy_zip:
+    name: Deploy CWEC2Alarms Lambda 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+
+      - name: AWS CWEC2Alarms Lambda Function Deploy ZIP Package
+        uses: appleboy/lambda-action@v0.1.5
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: "us-east-1"
+          function_name: CWEC2Alarms
+          zip_file: bin/ec2alarms.zip
+          #memory_size: 128
+          #timeout: 180
+          #handler: cw_ec2alarm_runner.cw_ec2alarm_handler
+          #role: arn:aws:iam::<account#>:role/LambdaAdmin
+          #runtime: python3.9
